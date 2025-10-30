@@ -85,9 +85,9 @@ def append_images_to_js(images_dir: str):
     for filename in os.listdir(images_dir):
         if filename.endswith(".jpg"):
             try:
-                with open("images.js", "a") as file:
+                with open("../src/www/js/images.js", "a") as file:
                     file.write(f"// {filename[:-4]}\n")
-                    file.write(f"galleryItems.push({{ src: '{images_dir}/{filename}' }});\n")
+                    file.write(f"galleryItems.push({{ src: '../{images_dir}/{filename}' }});\n")
             except FileNotFoundError:
                 print("Error: The file 'images.js' was not found.")
             except Exception as e:
