@@ -1,5 +1,6 @@
 .vscode/
 .venv/
 images/
-card_ids.txt
+image_ids.txt
 *.pyc
+__pycache__/
