@@ -16,9 +16,9 @@ def main():
     initialize_app()
     ids = read_image_ids("ids.txt")
 
-    def get_image_with_delay(image_id):
-            get_image(image_id)
-            time.sleep(0.1)  # Delay to limit request rate
+    def get_image_with_delay(image_id: int):
+        get_image(image_id)
+        time.sleep(0.1)  # Delay to limit request rate
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         executor.map(get_image_with_delay, ids)
@@ -51,20 +51,18 @@ def read_image_ids(filename: str) -> list[str]:
         ]
 
 # Retrieve image by ID, downloading if not present locally
-def get_image(image_id) -> str:
+def get_image(image_id: int):
     card_path = f"./images/{image_id}"
-    card_id = os.path.basename(card_path)
 
     if not os.path.exists(card_path):
         print(f"Image {image_id} not found locally. Downloading...")
         get_image_from_source(image_id, card_path)
     else:
         print(f"Image {image_id} found locally at {card_path}")
-    
-    return card_id
+
 
 # Download image from external source and save locally
-def get_image_from_source(image_id, card_path):
+def get_image_from_source(image_id: int, card_path: str):
     BASE_URL = "https://images.ygoprodeck.com/images/cards/"
     url = f"{BASE_URL}{image_id}"
 
